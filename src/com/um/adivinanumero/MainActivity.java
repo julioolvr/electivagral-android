@@ -1,10 +1,11 @@
 package com.um.adivinanumero;
 
+import java.util.HashMap;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -15,7 +16,8 @@ import com.um.adivinanumero.dialogs.VictoriaDialog;
 import com.um.adivinanumero.dialogs.VictoriaDialog.VictoriaDialogListener;
 import com.um.adivinanumero.dominio.NumeroAleatorio;
 
-public class MainActivity extends FragmentActivity implements VictoriaDialogListener {
+public class MainActivity extends FragmentActivity implements
+		VictoriaDialogListener {
 
 	Aplicacion contexto;
 
@@ -34,7 +36,7 @@ public class MainActivity extends FragmentActivity implements VictoriaDialogList
 
 		((TextView) findViewById(R.id.intentos)).setText(contexto.getIntentos()
 				.toString());
-		
+
 		mostrarCorrectas(0);
 		mostrarRegulares(0);
 		mostrarIncorrectas(0);
@@ -55,12 +57,12 @@ public class MainActivity extends FragmentActivity implements VictoriaDialogList
 		Integer intentos = contexto.incrementarIntentos();
 
 		try {
-			SparseIntArray resultado = contexto.getNumero().compararCantidades(
-					guess);
+			HashMap<NumeroAleatorio.Resultado, Integer> resultado = (HashMap<NumeroAleatorio.Resultado, Integer>) contexto
+					.getNumero().compararCantidades(guess);
 
-			mostrarCorrectas(resultado.get(NumeroAleatorio.CORRECTO));
-			mostrarRegulares(resultado.get(NumeroAleatorio.REGULAR));
-			mostrarIncorrectas(resultado.get(NumeroAleatorio.ERROR));
+			mostrarCorrectas(resultado.get(NumeroAleatorio.Resultado.CORRECTO));
+			mostrarRegulares(resultado.get(NumeroAleatorio.Resultado.REGULAR));
+			mostrarIncorrectas(resultado.get(NumeroAleatorio.Resultado.ERROR));
 
 			guessView.setText("");
 
@@ -68,7 +70,7 @@ public class MainActivity extends FragmentActivity implements VictoriaDialogList
 					.toString());
 
 			// TODO: Mover esta lógica a un objeto de dominio
-			if (resultado.get(NumeroAleatorio.CORRECTO) == 4) {
+			if (resultado.get(NumeroAleatorio.Resultado.CORRECTO) == 4) {
 				DialogFragment newFragment = VictoriaDialog.newInstance(this);
 				newFragment.show(getSupportFragmentManager(), "victoria");
 			}

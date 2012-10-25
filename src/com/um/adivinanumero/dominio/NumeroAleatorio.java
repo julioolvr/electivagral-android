@@ -1,18 +1,20 @@
 package com.um.adivinanumero.dominio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-
-import android.util.SparseIntArray;
 
 public class NumeroAleatorio {
 	
 	private static int CANTIDAD_DIGITOS = 4;
 	
 	// TODO: Mover esto a un enum?
-	public static final int CORRECTO = 0;
-	public static final int REGULAR = 1;
-	public static final int ERROR = 2;
+	public enum Resultado {
+		CORRECTO,
+		REGULAR,
+		ERROR
+	}
 	
 	String numero;
 	
@@ -20,8 +22,8 @@ public class NumeroAleatorio {
 		numero = generarNumeroAleatorio();
 	}
 	
-	public int[] comparar(String guess) {
-		int[] resultado = new int[4];
+	public Resultado[] comparar(String guess) {
+		Resultado[] resultado = new Resultado[4];
 		
 		if (guess.length() != 4) {
 			throw new IllegalArgumentException("El número adivinado debe ser de 4 dígitos");
@@ -31,11 +33,11 @@ public class NumeroAleatorio {
 			int index = numero.indexOf(guess.charAt(caracter));
 
 			if (index == caracter) {
-				resultado[caracter] = CORRECTO;
+				resultado[caracter] = Resultado.CORRECTO;
 			} else if (index >= 0) {
-				resultado[caracter] = REGULAR;
+				resultado[caracter] = Resultado.REGULAR;
 			} else {
-				resultado[caracter] = ERROR;
+				resultado[caracter] = Resultado.ERROR;
 			}
 		}
 		
@@ -43,23 +45,23 @@ public class NumeroAleatorio {
 	}
 	
 	public boolean acertado(String guess) {
-		int[] resultado = comparar(guess);
+		Resultado[] resultado = comparar(guess);
 		
 		for (int i = 0; i < resultado.length; i++) {
-			if (resultado[i] != CORRECTO) return false;
+			if (resultado[i] != Resultado.CORRECTO) return false;
 		}
 		
 		return true;
 	}
 	
-	public SparseIntArray compararCantidades(String guess) {
-		int[] comparacion = comparar(guess);
+	public Map<Resultado, Integer> compararCantidades(String guess) {
+		Resultado[] comparacion = comparar(guess);
 		
-		SparseIntArray resultado = new SparseIntArray(3);
+		HashMap<Resultado, Integer> resultado = new HashMap<Resultado, Integer>();
 		
-		resultado.put(CORRECTO, 0);
-		resultado.put(ERROR, 0);
-		resultado.put(REGULAR, 0);
+		resultado.put(Resultado.CORRECTO, 0);
+		resultado.put(Resultado.ERROR, 0);
+		resultado.put(Resultado.REGULAR, 0);
 		
 		for(int i = 0; i < comparacion.length; i++) {
 			int anterior = resultado.get(comparacion[i]);
