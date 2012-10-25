@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 public class VictoriaDialog extends DialogFragment {
 	public interface VictoriaDialogListener {
 		public void onDialogPositiveClick(DialogFragment dialog);
+		public void onDialogCancel(DialogFragment dialog);
 	}
 	
 	static VictoriaDialogListener listener;
@@ -32,8 +33,7 @@ public class VictoriaDialog extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
 		builder.setMessage("¡Acertaste el número!"); // TODO: Mover como resource
-		builder.setCancelable(false);
-		
+
 		builder.setPositiveButton("Jugar de nuevo", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				listener.onDialogPositiveClick(VictoriaDialog.this);
@@ -41,5 +41,10 @@ public class VictoriaDialog extends DialogFragment {
 		});
 		
 		return builder.create();
+	}
+	
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		listener.onDialogCancel(VictoriaDialog.this);
 	}
 }

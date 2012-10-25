@@ -83,6 +83,11 @@ public class MainActivity extends FragmentActivity implements
 		// Reinicializar el juego
 		inicializarJuego();
 	}
+	
+	public void onDialogCancel(DialogFragment dialog) {
+		// Reinicializar el juego
+		inicializarJuego();
+	}
 
 	/*
 	 * HELPERS
