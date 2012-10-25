@@ -1,9 +1,9 @@
 package com.um.adivinanumero;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.View;
@@ -15,7 +15,7 @@ import com.um.adivinanumero.dialogs.VictoriaDialog;
 import com.um.adivinanumero.dialogs.VictoriaDialog.VictoriaDialogListener;
 import com.um.adivinanumero.dominio.NumeroAleatorio;
 
-public class MainActivity extends Activity implements VictoriaDialogListener {
+public class MainActivity extends FragmentActivity implements VictoriaDialogListener {
 
 	Aplicacion contexto;
 
@@ -70,8 +70,7 @@ public class MainActivity extends Activity implements VictoriaDialogListener {
 			// TODO: Mover esta lógica a un objeto de dominio
 			if (resultado.get(NumeroAleatorio.CORRECTO) == 4) {
 				DialogFragment newFragment = VictoriaDialog.newInstance(this);
-				get
-				newFragment.show(getFragmentManager(), "victoria");
+				newFragment.show(getSupportFragmentManager(), "victoria");
 			}
 		} catch (IllegalArgumentException e) {
 			mostrarMensaje("Deben ser 4 dígitos");
