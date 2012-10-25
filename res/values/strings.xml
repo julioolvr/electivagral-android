@@ -5,5 +5,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="boton_adivinar">Adivinar</string>
     <string name="resultado">Resultado:</string>
+    <string name="intentos">Intentos:</string>
+    <string name="victoria">¡Acertaste el número!</string>
 
 </resources>
