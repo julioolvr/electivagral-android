@@ -3,6 +3,8 @@ package com.um.adivinanumero.dominio;
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.util.SparseIntArray;
+
 public class NumeroAleatorio {
 	
 	private static int CANTIDAD_DIGITOS = 4;
@@ -47,6 +49,23 @@ public class NumeroAleatorio {
 		}
 		
 		return true;
+	}
+	
+	public SparseIntArray compararCantidades(String guess) {
+		int[] comparacion = comparar(guess);
+		
+		SparseIntArray resultado = new SparseIntArray(3);
+		
+		resultado.put(CORRECTO, 0);
+		resultado.put(ERROR, 0);
+		resultado.put(REGULAR, 0);
+		
+		for(int i = 0; i < comparacion.length; i++) {
+			int anterior = resultado.get(comparacion[i]);
+			resultado.put(comparacion[i], anterior + 1);
+		}
+		
+		return resultado;
 	}
 	
 	@Override

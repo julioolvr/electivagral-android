@@ -33,43 +33,41 @@
         android:text="@string/boton_adivinar" />
 
     <TextView
-        android:id="@+id/digito1"
+        android:id="@+id/resultado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="14dp"
         android:layout_toLeftOf="@+id/numeroAleatorio"
-        android:maxWidth="30dp"
-        android:text="0"
+        android:text="@string/resultado"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/digito2"
+        android:id="@+id/correctas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/digito1"
-        android:layout_alignBottom="@+id/digito1"
+        android:layout_alignBottom="@+id/resultado"
         android:layout_alignLeft="@+id/numeroAleatorio"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginLeft="19dp"
+        android:text="correctas"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/digito3"
+        android:id="@+id/regulares"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/digito2"
-        android:layout_toRightOf="@+id/digito2"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignLeft="@+id/correctas"
+        android:layout_centerVertical="true"
+        android:text="regulares"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/digito4"
+        android:id="@+id/incorrectas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/digito3"
-        android:layout_alignBottom="@+id/digito3"
-        android:layout_toRightOf="@+id/digito3"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignLeft="@+id/regulares"
+        android:layout_below="@+id/regulares"
+        android:text="incorrectas"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

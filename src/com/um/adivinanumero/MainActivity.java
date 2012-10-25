@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -41,20 +42,12 @@ public class MainActivity extends Activity {
     	String guess = guessView.getText().toString();
     	
     	try {
-    		int[] resultado = numero.comparar(guess);
+    		SparseIntArray resultado = numero.compararCantidades(guess);
     		
-    		TextView[] labelDigitos = new TextView[4];
-        	
-        	labelDigitos[0] = (TextView) findViewById(R.id.digito1);
-        	labelDigitos[1] = (TextView) findViewById(R.id.digito2);
-        	labelDigitos[2] = (TextView) findViewById(R.id.digito3);
-        	labelDigitos[3] = (TextView) findViewById(R.id.digito4);
-        	
-        	for (int i = 0; i < guess.length(); i++) {
-        		labelDigitos[i].setText(String.valueOf(guess.charAt(i)));
-        		labelDigitos[i].setBackgroundColor(coloresEstado(resultado[i]));
-        	}
-        	
+    		mostrarCorrectas(resultado.get(NumeroAleatorio.CORRECTO));
+    		mostrarRegulares(resultado.get(NumeroAleatorio.REGULAR));
+    		mostrarIncorrectas(resultado.get(NumeroAleatorio.ERROR));
+    		
         	guessView.setText("");
         	mostrarMensaje(String.valueOf(numero.acertado(guess)));
     	} catch (IllegalArgumentException e) {
@@ -62,22 +55,24 @@ public class MainActivity extends Activity {
     	}
     }
     
-    private int coloresEstado(int estado) {
-    	int color = Color.RED;
-    	
-    	switch (estado) {
-    	case NumeroAleatorio.CORRECTO:
-    		color = Color.GREEN;
-    		break;
-    	case NumeroAleatorio.REGULAR:
-    		color = Color.YELLOW;
-    		break;
-    	case NumeroAleatorio.ERROR:
-    		color = Color.RED;
-    		break;
-    	}
-    	
-    	return color;
+    /*
+     * HELPERS
+     */
+    
+    private void mostrarCorrectas(int cantidad) {
+    	mostrarResultado(R.id.correctas, cantidad + (cantidad == 1 ? " correcta" : " correctas"));
+    }
+    
+    private void mostrarRegulares(int cantidad) {
+    	mostrarResultado(R.id.regulares, cantidad + (cantidad == 1 ? " regular" : " regulares"));
+    }
+    
+    private void mostrarIncorrectas(int cantidad) {
+    	mostrarResultado(R.id.incorrectas, cantidad + (cantidad == 1 ? " incorrecta" : " incorrectas"));
+    }
+    
+    private void mostrarResultado(int viewId, String texto) {
+    	((TextView) findViewById(viewId)).setText(texto);
     }
     
     private void mostrarMensaje(String mensaje) {
