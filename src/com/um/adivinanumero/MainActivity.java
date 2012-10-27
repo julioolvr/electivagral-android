@@ -32,9 +32,6 @@ public class MainActivity extends FragmentActivity implements
 	private void inicializarJuego() {
 		contexto.inicializarPartida();
 
-		((TextView) findViewById(R.id.intentos)).setText(contexto.getIntentos()
-				.toString());
-
 		actualizarCantidades();
 	}
 
