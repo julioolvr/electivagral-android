@@ -1,7 +1,5 @@
 package com.um.adivinanumero;
 
-import java.util.HashMap;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 
 import com.um.adivinanumero.dialogs.VictoriaDialog;
 import com.um.adivinanumero.dialogs.VictoriaDialog.VictoriaDialogListener;
-import com.um.adivinanumero.dominio.NumeroAleatorio;
 
 public class MainActivity extends FragmentActivity implements
 		VictoriaDialogListener {
@@ -37,9 +34,7 @@ public class MainActivity extends FragmentActivity implements
 		((TextView) findViewById(R.id.intentos)).setText(contexto.getIntentos()
 				.toString());
 
-		mostrarCorrectas(0);
-		mostrarRegulares(0);
-		mostrarIncorrectas(0);
+		actualizarCantidades();
 	}
 
 	@Override
@@ -54,23 +49,15 @@ public class MainActivity extends FragmentActivity implements
 	public void adivinarNumero(View view) {
 		EditText guessView = (EditText) findViewById(R.id.numeroIngresado);
 		String guess = guessView.getText().toString();
-		Integer intentos = contexto.incrementarIntentos();
 
 		try {
-			HashMap<NumeroAleatorio.Resultado, Integer> resultado = (HashMap<NumeroAleatorio.Resultado, Integer>) contexto
-					.getNumero().compararCantidades(guess);
+			contexto.intentar(guess);
 
-			mostrarCorrectas(resultado.get(NumeroAleatorio.Resultado.CORRECTO));
-			mostrarRegulares(resultado.get(NumeroAleatorio.Resultado.REGULAR));
-			mostrarIncorrectas(resultado.get(NumeroAleatorio.Resultado.ERROR));
+			actualizarCantidades();
 
 			guessView.setText("");
 
-			((TextView) findViewById(R.id.intentos)).setText(intentos
-					.toString());
-
-			// TODO: Mover esta lógica a un objeto de dominio
-			if (resultado.get(NumeroAleatorio.Resultado.CORRECTO) == 4) {
+			if (contexto.acertado()) {
 				DialogFragment newFragment = VictoriaDialog.newInstance(this);
 				newFragment.show(getSupportFragmentManager(), "victoria");
 			}
@@ -83,7 +70,7 @@ public class MainActivity extends FragmentActivity implements
 		// Reinicializar el juego
 		inicializarJuego();
 	}
-	
+
 	public void onDialogCancel(DialogFragment dialog) {
 		// Reinicializar el juego
 		inicializarJuego();
@@ -92,6 +79,15 @@ public class MainActivity extends FragmentActivity implements
 	/*
 	 * HELPERS
 	 */
+
+	private void actualizarCantidades() {
+		mostrarCorrectas(contexto.cantidadCorrectas());
+		mostrarRegulares(contexto.cantidadRegulares());
+		mostrarIncorrectas(contexto.cantidadIncorrectos());
+
+		((TextView) findViewById(R.id.intentos)).setText(contexto
+				.cantidadIntentos().toString());
+	}
 
 	private void mostrarCorrectas(int cantidad) {
 		mostrarResultado(R.id.correctas, cantidad
