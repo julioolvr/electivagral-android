@@ -9,7 +9,6 @@ public class NumeroAleatorio {
 	
 	private static int CANTIDAD_DIGITOS = 4;
 	
-	// TODO: Mover esto a un enum?
 	public enum Resultado {
 		CORRECTO,
 		REGULAR,
