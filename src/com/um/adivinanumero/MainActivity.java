@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.um.adivinanumero.dialogs.VictoriaDialog;
 import com.um.adivinanumero.dialogs.VictoriaDialog.VictoriaDialogListener;
+import com.um.adivinanumero.dominio.NumeroAleatorio;
 
 public class MainActivity extends FragmentActivity implements
 		VictoriaDialogListener {
@@ -62,7 +63,7 @@ public class MainActivity extends FragmentActivity implements
 				newFragment.show(getSupportFragmentManager(), "victoria");
 			}
 		} catch (IllegalArgumentException e) {
-			mostrarMensaje("Deben ser 4 dígitos");
+			mostrarMensaje(String.format(getString(R.string.cantidad_digitos), NumeroAleatorio.CANTIDAD_DIGITOS));
 		}
 	}
 

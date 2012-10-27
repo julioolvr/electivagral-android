@@ -1,5 +1,7 @@
 package com.um.adivinanumero.dialogs;
 
+import com.um.adivinanumero.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -31,10 +33,9 @@ public class VictoriaDialog extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		
-		builder.setMessage("¡Acertaste el número!"); // TODO: Mover como resource
+		builder.setMessage(getString(R.string.victoria)); // TODO: Mover como resource
 
-		builder.setPositiveButton("Jugar de nuevo", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(getString(R.string.jugar_de_nuevo), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				listener.onDialogPositiveClick(VictoriaDialog.this);
 			}

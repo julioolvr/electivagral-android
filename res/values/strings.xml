@@ -7,9 +7,11 @@
     <string name="resultado">Resultado:</string>
     <string name="intentos">Intentos:</string>
     <string name="victoria">¡Acertaste el número!</string>
+    <string name="jugar_de_nuevo">Jugar de nuevo</string>
     <string name="default_correctas">0 correctas</string>
     <string name="default_regulares">0 regulares</string>
     <string name="default_incorrectas">0 incorrectas</string>
     <string name="default_intentos">0</string>
 
+    <string name="cantidad_digitos">Deben ser %1$d dígitos</string>
 </resources>
