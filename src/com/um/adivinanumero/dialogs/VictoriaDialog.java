@@ -1,7 +1,5 @@
 package com.um.adivinanumero.dialogs;
 
-import com.um.adivinanumero.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,7 +7,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
+import com.um.adivinanumero.R;
+
 public class VictoriaDialog extends DialogFragment {
+	/**
+	 * Interfaz para que implementen quien lo requiera implemente
+	 * listeners para los eventos de este diálogo.
+	 * 
+	 * @author julio
+	 */
 	public interface VictoriaDialogListener {
 		public void onDialogPositiveClick(DialogFragment dialog);
 		public void onDialogCancel(DialogFragment dialog);
@@ -17,6 +23,15 @@ public class VictoriaDialog extends DialogFragment {
 	
 	static VictoriaDialogListener listener;
 	
+	/**
+	 * Constructor, recibe como parámetro la Activity que implementa los listeners
+	 * para los eventos de diálogo.
+	 * 
+	 * @param activity
+	 * 		Activity que implementa {@link VictoriaDialogListener}
+	 * @return
+	 * 		Nueva instancia del diálogo.
+	 */
 	public static VictoriaDialog newInstance(Activity activity) {
 		try {
 			listener = (VictoriaDialogListener) activity;
@@ -28,12 +43,16 @@ public class VictoriaDialog extends DialogFragment {
 		return frag;
 	}
 	
+	/*
+	 * Constructor default privado para forzar el uso del método
+	 * newInstance para la generación de instancias.
+	 */
 	private VictoriaDialog() {}
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage(getString(R.string.victoria)); // TODO: Mover como resource
+		builder.setMessage(getString(R.string.victoria));
 
 		builder.setPositiveButton(getString(R.string.jugar_de_nuevo), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {

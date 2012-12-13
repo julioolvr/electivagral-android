@@ -1,6 +1,7 @@
 package com.um.adivinanumero;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,12 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.um.adivinanumero.dialogs.RankingDialog;
+import com.um.adivinanumero.dialogs.RankingDialog.RankingDialogListener;
 import com.um.adivinanumero.dialogs.VictoriaDialog;
 import com.um.adivinanumero.dialogs.VictoriaDialog.VictoriaDialogListener;
 import com.um.adivinanumero.dominio.NumeroAleatorio;
 
 public class MainActivity extends FragmentActivity implements
-		VictoriaDialogListener {
+		VictoriaDialogListener,
+		RankingDialogListener {
 
 	Aplicacion contexto;
 
@@ -25,7 +29,6 @@ public class MainActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_main);
 
 		contexto = (Aplicacion) getApplicationContext();
-
 		mostrarMensaje(contexto.getNumero().toString());
 	}
 
@@ -33,6 +36,7 @@ public class MainActivity extends FragmentActivity implements
 		contexto.inicializarPartida();
 
 		actualizarCantidades();
+		mostrarMensaje(contexto.getNumero().toString());
 	}
 
 	@Override
@@ -56,8 +60,13 @@ public class MainActivity extends FragmentActivity implements
 			guessView.setText("");
 
 			if (contexto.acertado()) {
-				DialogFragment newFragment = VictoriaDialog.newInstance(this);
-				newFragment.show(getSupportFragmentManager(), "victoria");
+				if (contexto.entraAlRanking()) {
+					DialogFragment newFragment = RankingDialog.newInstance(this);
+					newFragment.show(getSupportFragmentManager(), "ranking");
+				} else {
+					DialogFragment newFragment = VictoriaDialog.newInstance(this);
+					newFragment.show(getSupportFragmentManager(), "victoria");
+				}
 			}
 		} catch (IllegalArgumentException e) {
 			mostrarMensaje(String.format(getString(R.string.cantidad_digitos), NumeroAleatorio.CANTIDAD_DIGITOS));
@@ -71,6 +80,18 @@ public class MainActivity extends FragmentActivity implements
 
 	public void onDialogCancel(DialogFragment dialog) {
 		// Reinicializar el juego
+		inicializarJuego();
+	}
+	
+	@Override
+	public void onRankingDialogCancel(DialogFragment dialog) {
+		inicializarJuego();
+	}
+	
+	@Override
+	public void onRankingDialogPositiveClick(DialogFragment dialog) {
+		contexto.agregarAlRanking(((RankingDialog)dialog).getNombreJugador());
+		mostrarRanking();
 		inicializarJuego();
 	}
 
@@ -112,5 +133,10 @@ public class MainActivity extends FragmentActivity implements
 
 		Toast toast = Toast.makeText(context, mensaje, duration);
 		toast.show();
+	}
+	
+	private void mostrarRanking() {
+		Intent irAlRanking = new Intent(getApplicationContext(), RankingActivity.class);
+		startActivity(irAlRanking);
 	}
 }

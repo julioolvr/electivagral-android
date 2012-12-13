@@ -7,6 +7,9 @@
     <string name="resultado">Resultado:</string>
     <string name="intentos">Intentos:</string>
     <string name="victoria">¡Acertaste el número!</string>
+    <string name="victoria_ranking">¡Entraste al ranking!</string>
+    <string name="nombre_hint">Nombre</string>
+    <string name="aceptar">Aceptar</string>
     <string name="jugar_de_nuevo">Jugar de nuevo</string>
     <string name="default_correctas">0 correctas</string>
     <string name="default_regulares">0 regulares</string>

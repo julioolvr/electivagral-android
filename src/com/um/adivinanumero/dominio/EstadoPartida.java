@@ -43,4 +43,17 @@ public class EstadoPartida {
 	public Boolean acertado() {
 		return ultimoIntento().acertado();
 	}
+	
+	public Boolean entraAlRanking() {
+		return Ranking.getInstance().entraEnRanking(cantidadIntentos());
+	}
+	
+	public Boolean agregarAlRanking(String nombre) {
+		Jugador jugador = new Jugador(nombre, cantidadIntentos());
+		return Ranking.getInstance().agregarAlRanking(jugador);
+	}
+	
+	public Ranking getRanking() {
+		return Ranking.getInstance();
+	}
 }
