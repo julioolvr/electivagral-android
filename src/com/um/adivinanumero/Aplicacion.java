@@ -1,12 +1,14 @@
 package com.um.adivinanumero;
 
+import java.util.List;
+
 import android.app.Application;
 
-import com.um.adivinanumero.dominio.NumeroAleatorio;
+import com.um.adivinanumero.dominio.EstadoPartida;
+import com.um.adivinanumero.dominio.Intento;
 
 public class Aplicacion extends Application {
-	private NumeroAleatorio numero;
-	private Integer intentos;
+	private EstadoPartida estado;
 	
 	@Override
 	public void onCreate() {
@@ -16,19 +18,43 @@ public class Aplicacion extends Application {
 	}
 	
 	public void inicializarPartida() {
-		numero = new NumeroAleatorio();
-		intentos = 0;
+		estado = new EstadoPartida();
 	}
 	
-	public NumeroAleatorio getNumero() {
-		return numero;
+	public String getNumero() {
+		return estado.getNumero().toString();
 	}
 	
 	public Integer getIntentos() {
-		return intentos;
+		return estado.cantidadIntentos();
 	}
 	
-	public Integer incrementarIntentos() {
-		return ++intentos;
+	public List<Intento> getUltimosIntentos(Integer n) {
+		return estado.getUltimosIntentos(n);
+	}
+	
+	public Integer intentar(String guess) {
+		Intento ultimoIntento = new Intento(estado.getNumero(), guess);
+		return estado.agregarIntento(ultimoIntento);
+	}
+	
+	public Boolean acertado() {
+		return estado.acertado();
+	}
+	
+	public Integer cantidadIntentos() {
+		return estado.cantidadIntentos();
+	}
+	
+	public Integer cantidadCorrectas() {
+		return estado.cantidadCorrectas();
+	}
+	
+	public Integer cantidadRegulares() {
+		return estado.cantidadRegulares();
+	}
+	
+	public Integer cantidadIncorrectos() {
+		return estado.cantidadIncorrectos();
 	}
 }

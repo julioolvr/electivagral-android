@@ -1,87 +1,113 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
     <EditText
         android:id="@+id/numeroIngresado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:ems="10"
+        android:ems="4"
+        android:layout_gravity="center"
         android:inputType="number"
         android:maxLength="4" >
 
-        <requestFocus />
+        <requestFocus android:layout_width="fill_parent" />
     </EditText>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/numeroIngresado"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:onClick="adivinarNumero"
         android:text="@string/boton_adivinar" />
-
-    <TextView
-        android:id="@+id/resultado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/numeroIngresado"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="43dp"
-        android:text="@string/resultado"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/correctas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/resultado"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/resultado"
-        android:text="correctas"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/regulares"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/correctas"
-        android:layout_below="@+id/correctas"
-        android:layout_marginTop="16dp"
-        android:text="regulares"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/incorrectas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/regulares"
-        android:layout_below="@+id/regulares"
-        android:layout_marginTop="23dp"
-        android:text="incorrectas"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/intentosLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
-        android:layout_toLeftOf="@+id/incorrectas"
-        android:text="@string/intentos"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/intentos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/regulares"
-        android:layout_below="@+id/button1"
-        android:text="0"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-</RelativeLayout>
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    xmlns:tools="http://schemas.android.com/tools"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:orientation="vertical" >
+        
+	        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			    xmlns:tools="http://schemas.android.com/tools"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal" >
+		        
+			    <TextView
+			        android:id="@+id/intentosLabel"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginRight="5dp"
+			        android:text="@string/intentos"
+			        android:textAppearance="?android:attr/textAppearanceLarge" />
+			
+			    <TextView
+			        android:id="@+id/intentos"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/default_intentos"
+			        android:textAppearance="?android:attr/textAppearanceLarge" />
+			    
+			</LinearLayout>
+	
+		    <TextView
+		        android:id="@+id/resultado"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/resultado"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		
+		    <TextView
+		        android:id="@+id/correctas"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/default_correctas"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		    <TextView
+		        android:id="@+id/regulares"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/default_regulares"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		    <TextView
+		        android:id="@+id/incorrectas"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/default_incorrectas"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    </LinearLayout>
+	    
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    xmlns:tools="http://schemas.android.com/tools"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:orientation="vertical" >
+		    
+            <TextView
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/intentos_previos"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+            
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			    xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/intentos_previos_layout"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

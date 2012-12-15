@@ -3,16 +3,9 @@ package com.um.adivinanumero.dominio;
 import java.util.ArrayList;
 import java.util.Random;
 
-import android.util.SparseIntArray;
-
 public class NumeroAleatorio {
 	
-	private static int CANTIDAD_DIGITOS = 4;
-	
-	// TODO: Mover esto a un enum?
-	public static final int CORRECTO = 0;
-	public static final int REGULAR = 1;
-	public static final int ERROR = 2;
+	public static int CANTIDAD_DIGITOS = 4;
 	
 	String numero;
 	
@@ -20,51 +13,32 @@ public class NumeroAleatorio {
 		numero = generarNumeroAleatorio();
 	}
 	
-	public int[] comparar(String guess) {
-		int[] resultado = new int[4];
+	public Resultado comparar(String guess) {
+		Resultado resultado = new Resultado();
 		
 		if (guess.length() != 4) {
 			throw new IllegalArgumentException("El número adivinado debe ser de 4 dígitos");
 		}
 		
+		Integer correctos = 0;
+		Integer regulares = 0;
+		Integer incorrectos = 0;
+		
 		for (int caracter = 0; caracter < numero.length(); caracter++) {
 			int index = numero.indexOf(guess.charAt(caracter));
 
 			if (index == caracter) {
-				resultado[caracter] = CORRECTO;
+				correctos++;
 			} else if (index >= 0) {
-				resultado[caracter] = REGULAR;
+				regulares++;
 			} else {
-				resultado[caracter] = ERROR;
+				incorrectos++;
 			}
 		}
 		
-		return resultado;
-	}
-	
-	public boolean acertado(String guess) {
-		int[] resultado = comparar(guess);
-		
-		for (int i = 0; i < resultado.length; i++) {
-			if (resultado[i] != CORRECTO) return false;
-		}
-		
-		return true;
-	}
-	
-	public SparseIntArray compararCantidades(String guess) {
-		int[] comparacion = comparar(guess);
-		
-		SparseIntArray resultado = new SparseIntArray(3);
-		
-		resultado.put(CORRECTO, 0);
-		resultado.put(ERROR, 0);
-		resultado.put(REGULAR, 0);
-		
-		for(int i = 0; i < comparacion.length; i++) {
-			int anterior = resultado.get(comparacion[i]);
-			resultado.put(comparacion[i], anterior + 1);
-		}
+		resultado.setCorrectos(correctos);
+		resultado.setIncorrectos(incorrectos);
+		resultado.setRegulares(regulares);
 		
 		return resultado;
 	}
@@ -74,7 +48,7 @@ public class NumeroAleatorio {
 		return numero;
 	}
 	
-	public static String generarNumeroAleatorio() {
+	private static String generarNumeroAleatorio() {
 		ArrayList<Integer> cifras = getCifras();
 		
 		String numero = "";

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ranking_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TableRow>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:text="@string/ranking_intentos"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/ranking_nombre" />
+    </TableRow>
+</TableLayout>
