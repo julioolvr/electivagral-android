@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.um.adivinanumero.dominio.Jugador;
@@ -27,15 +29,25 @@ public class RankingActivity extends FragmentActivity {
 	 * HELPERs
 	 */
 	private void mostrarRanking() {
-		LinearLayout layout = (LinearLayout) findViewById(R.id.ranking_layout);
+		TableLayout layout = (TableLayout) findViewById(R.id.ranking_layout);
 		Ranking ranking = Ranking.getRanking(this);
 		
 		for (Jugador j : ranking) {
-			TextView jugadorTextView = new TextView(this);
-			jugadorTextView.setText(j.getNombre() + " - " + j.getCantidadIntentos() + " intentos");
-			jugadorTextView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+			TableRow jugadorTableRow = new TableRow(this);
+			
+			TextView intentosTextView = new TextView(this);
+			intentosTextView.setText(j.getCantidadIntentos().toString());
+			intentosTextView.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+			
+			TextView nombreTextView = new TextView(this);
+			nombreTextView.setText(j.getNombre());
+			nombreTextView.setLayoutParams(new TableRow.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
 
-			layout.addView(jugadorTextView); // TODO: Ver NPE cuando un nuevo jugador se suma al ranking
+			jugadorTableRow.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+			jugadorTableRow.addView(intentosTextView);
+			jugadorTableRow.addView(nombreTextView);
+			
+			layout.addView(jugadorTableRow);
 		}
 	}
 }

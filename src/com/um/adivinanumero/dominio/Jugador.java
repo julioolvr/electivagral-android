@@ -55,6 +55,10 @@ public class Jugador {
 	 * 		Si perdería contra un jugador con esta cantidad de intentos
 	 */
 	public Boolean pierdeContra(Integer intentos) {
-		return this.cantidadIntentos > intentos;
+		/*
+		 * Pierde si tiene más o los mismos intentos, para que jugadores
+		 * nuevos con la misma cantidad de intentos entren al ranking
+		 */
+		return this.cantidadIntentos >= intentos;
 	}
 }
