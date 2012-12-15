@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.um.adivinanumero.dominio.Jugador;
+import com.um.adivinanumero.dominio.Ranking;
 
 public class RankingActivity extends FragmentActivity {
 
@@ -27,8 +28,9 @@ public class RankingActivity extends FragmentActivity {
 	 */
 	private void mostrarRanking() {
 		LinearLayout layout = (LinearLayout) findViewById(R.id.ranking_layout);
+		Ranking ranking = Ranking.getRanking(this);
 		
-		for (Jugador j : contexto.getRanking()) {
+		for (Jugador j : ranking) {
 			TextView jugadorTextView = new TextView(this);
 			jugadorTextView.setText(j.getNombre() + " - " + j.getCantidadIntentos() + " intentos");
 			jugadorTextView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));

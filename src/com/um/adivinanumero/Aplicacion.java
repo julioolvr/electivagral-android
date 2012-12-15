@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.um.adivinanumero.dominio.EstadoPartida;
 import com.um.adivinanumero.dominio.Intento;
-import com.um.adivinanumero.dominio.Ranking;
 
 public class Aplicacion extends Application {
 	private EstadoPartida estado;
@@ -51,17 +50,5 @@ public class Aplicacion extends Application {
 	
 	public Integer cantidadIncorrectos() {
 		return estado.cantidadIncorrectos();
-	}
-	
-	public Boolean entraAlRanking() {
-		return estado.entraAlRanking();
-	}
-	
-	public Boolean agregarAlRanking(String nombre) {
-		return estado.agregarAlRanking(nombre);
-	}
-	
-	public Ranking getRanking() {
-		return estado.getRanking();
 	}
 }

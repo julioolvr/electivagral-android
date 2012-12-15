@@ -15,7 +15,9 @@ import com.um.adivinanumero.dialogs.RankingDialog;
 import com.um.adivinanumero.dialogs.RankingDialog.RankingDialogListener;
 import com.um.adivinanumero.dialogs.VictoriaDialog;
 import com.um.adivinanumero.dialogs.VictoriaDialog.VictoriaDialogListener;
+import com.um.adivinanumero.dominio.Jugador;
 import com.um.adivinanumero.dominio.NumeroAleatorio;
+import com.um.adivinanumero.dominio.Ranking;
 
 public class MainActivity extends FragmentActivity implements
 		VictoriaDialogListener,
@@ -60,7 +62,10 @@ public class MainActivity extends FragmentActivity implements
 			guessView.setText("");
 
 			if (contexto.acertado()) {
-				if (contexto.entraAlRanking()) {
+				Ranking ranking = Ranking.getRanking(this);
+				Integer intentos = contexto.cantidadIntentos();
+				
+				if (ranking.entraEnRanking(intentos)) {
 					DialogFragment newFragment = RankingDialog.newInstance(this);
 					newFragment.show(getSupportFragmentManager(), "ranking");
 				} else {
@@ -90,7 +95,9 @@ public class MainActivity extends FragmentActivity implements
 	
 	@Override
 	public void onRankingDialogPositiveClick(DialogFragment dialog) {
-		contexto.agregarAlRanking(((RankingDialog)dialog).getNombreJugador());
+		Ranking ranking = Ranking.getRanking(this);
+		Jugador jugador = new Jugador(((RankingDialog)dialog).getNombreJugador(), contexto.cantidadIntentos());
+		ranking.agregarAlRanking(jugador, this);
 		mostrarRanking();
 		inicializarJuego();
 	}

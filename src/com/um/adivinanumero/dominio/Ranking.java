@@ -3,20 +3,23 @@ package com.um.adivinanumero.dominio;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import android.app.Activity;
+
+import com.um.adivinanumero.persistencia.dao.JugadorDAO;
+
 public class Ranking implements Iterable<Jugador> {
 	public static Integer LIMITE_RANKING = 10;
-	public static Ranking instance = null;
 	
 	ArrayList<Jugador> jugadores = new ArrayList<Jugador>(LIMITE_RANKING);
 	
-	private Ranking() {}
+	private Ranking(ArrayList<Jugador> jugadores) {
+		this.jugadores = jugadores;
+	}
 	
-	public static Ranking getInstance() {
-		if (instance == null) {
-			instance = new Ranking();
-		}
-		
-		return instance;
+	public static Ranking getRanking(Activity context) {
+		JugadorDAO jugadorDAO = new JugadorDAO(context);
+		Ranking ranking = new Ranking(jugadorDAO.cargarJugadores());
+		return ranking;
 	}
 	
 	/**
@@ -43,15 +46,21 @@ public class Ranking implements Iterable<Jugador> {
 	 * @return
 	 * 		Si el jugador entró al ranking o no.
 	 */
-	public boolean agregarAlRanking(Jugador jugador) {
+	public boolean agregarAlRanking(Jugador jugador, Activity context) {
 		Integer i = 0;
 		Boolean entroAlRanking = false;
+		JugadorDAO jugadorDAO = new JugadorDAO(context);
 		
 		while(i < jugadores.size() && !entroAlRanking) {
 			if (jugadores.get(i).pierdeContra(jugador)) {
 				jugadores.add(i, jugador);
 				entroAlRanking = true;
-				// TODO: Borrar de la BD el que se fue del ranking
+
+				if (jugadores.size() > LIMITE_RANKING) {
+					Jugador perdedor = ultimoLugar();
+					jugadores.remove(perdedor);
+					jugadorDAO.eliminarJugador(perdedor);
+				}
 			}
 			i++;
 		}
@@ -63,6 +72,10 @@ public class Ranking implements Iterable<Jugador> {
 		if (!entroAlRanking && i < LIMITE_RANKING) {
 			jugadores.add(jugador);
 			entroAlRanking = true;
+		}
+		
+		if (entroAlRanking) {
+			jugadorDAO.guardarJugador(jugador);
 		}
 		
 		return entroAlRanking;

@@ -1,7 +1,6 @@
 package com.um.adivinanumero.persistencia.dao;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -46,10 +45,10 @@ public class JugadorDAO {
 		return id;
 	}
 	
-	public List<Jugador> cargarJugadores() {
+	public ArrayList<Jugador> cargarJugadores() {
 		String select = "SELECT " + KEY_ID + ", " + KEY_NOMBRE + ", " + KEY_CANTIDAD_INTENTOS + " " +
-				"FROM " + TABLE_NAME +
-				"ORDER BY " + KEY_CANTIDAD_INTENTOS + " DESC";
+				"FROM " + TABLE_NAME + " " +
+				"ORDER BY " + KEY_CANTIDAD_INTENTOS + " ASC";
 		
 		SQLiteDatabase db = databaseHelper.getReadableDatabase();
 		Cursor c = db.rawQuery(select, null);
@@ -70,7 +69,7 @@ public class JugadorDAO {
 	}
 	
 	public void eliminarJugador(Jugador jugador) {
-		String delete = "DELETE FROM " + TABLE_NAME +
+		String delete = "DELETE FROM " + TABLE_NAME + " " +
 				"WHERE id = ?;";
 		
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
