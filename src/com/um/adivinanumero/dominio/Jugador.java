@@ -1,12 +1,23 @@
 package com.um.adivinanumero.dominio;
 
 public class Jugador {
+	Long id;
 	String nombre;
 	Integer cantidadIntentos;
+	
+	public Jugador(Long id, String nombre, Integer cantidadIntentos) {
+		this.id = id;
+		this.nombre = nombre;
+		this.cantidadIntentos = cantidadIntentos;
+	}
 	
 	public Jugador(String nombre, Integer cantidadIntentos) {
 		this.nombre = nombre;
 		this.cantidadIntentos = cantidadIntentos;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 	
 	public String getNombre() {
@@ -15,6 +26,10 @@ public class Jugador {
 	
 	public Integer getCantidadIntentos() {
 		return cantidadIntentos;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	/**
