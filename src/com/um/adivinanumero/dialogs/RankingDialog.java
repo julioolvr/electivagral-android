@@ -73,7 +73,10 @@ public class RankingDialog extends DialogFragment {
 		return builder.create();
 	}
 	
-	// TODO: Rever que falta el cancel
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		listener.onRankingDialogCancel(RankingDialog.this);
+	}
 	
 	public String getNombreJugador() {
 		EditText textView = (EditText)this.getDialog().findViewById(R.id.nombre_jugador);
