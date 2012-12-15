@@ -1,5 +1,7 @@
 package com.um.adivinanumero;
 
+import java.util.List;
+
 import android.app.Application;
 
 import com.um.adivinanumero.dominio.EstadoPartida;
@@ -25,6 +27,10 @@ public class Aplicacion extends Application {
 	
 	public Integer getIntentos() {
 		return estado.cantidadIntentos();
+	}
+	
+	public List<Intento> getUltimosIntentos(Integer n) {
+		return estado.getUltimosIntentos(n);
 	}
 	
 	public Integer intentar(String guess) {

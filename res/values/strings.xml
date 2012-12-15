@@ -15,6 +15,7 @@
     <string name="default_regulares">0 regulares</string>
     <string name="default_incorrectas">0 incorrectas</string>
     <string name="default_intentos">0</string>
+    <string name="intentos_previos">Intentos previos</string>
     <string name="ranking_intentos">Intentos</string>
     <string name="ranking_nombre">Nombre</string>
 

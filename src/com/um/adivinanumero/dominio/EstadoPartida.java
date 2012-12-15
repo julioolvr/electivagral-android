@@ -1,6 +1,7 @@
 package com.um.adivinanumero.dominio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EstadoPartida {
 	private ArrayList<Intento> intentos;
@@ -38,6 +39,14 @@ public class EstadoPartida {
 	
 	public Intento ultimoIntento() {
 		return intentos.get(intentos.size() - 1);
+	}
+	
+	public List<Intento> getUltimosIntentos(Integer n) {
+		if (n >= intentos.size()) {
+			return intentos;
+		} else {
+			return intentos.subList(intentos.size() - n, intentos.size());
+		}
 	}
 	
 	public Boolean acertado() {

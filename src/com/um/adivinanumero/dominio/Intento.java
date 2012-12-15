@@ -11,6 +11,10 @@ public class Intento {
 		this.resultado = numero.comparar(guess);
 	}
 	
+	public String getGuess() {
+		return guess;
+	}
+	
 	public Boolean acertado() {
 		return resultado.esCorrecto();
 	}
