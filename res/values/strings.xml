@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">Adivina Número</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_ranking">Ranking</string>
     <string name="title_activity_main">Adivina el número</string>
     <string name="boton_adivinar">Adivinar</string>
     <string name="resultado">Resultado:</string>
