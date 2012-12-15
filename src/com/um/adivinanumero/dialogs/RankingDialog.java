@@ -13,7 +13,7 @@ import com.um.adivinanumero.R;
 
 public class RankingDialog extends DialogFragment {
 	/**
-	 * Interfaz para que implementen quien lo requiera implemente
+	 * Interfaz para que quien lo requiera implemente
 	 * listeners para los eventos de este diálogo.
 	 * 
 	 * @author julio
